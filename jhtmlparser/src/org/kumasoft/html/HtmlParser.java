@@ -28,6 +28,11 @@ public class HtmlParser implements CharCodes
      * The last char read.
      */
     private int c;
+	
+	/**
+	 * Work buffer size.
+	 */
+	private int bufferSize = 32000;
 
     /**
      * Parses HTML document which comes from the stream and invokes the handler's method.
@@ -54,7 +59,7 @@ public class HtmlParser implements CharCodes
 	throws IOException
     {
 	BufferedInputStream inBuf = new BufferedInputStream(in);
-        inBuf.mark(32000);  // TODO: buffer size is too large.
+        inBuf.mark(bufferSize);  // TODO: buffer size is too large.
 
         // detect page encoding
 	EncodeDetector detector = new EncodeDetector(encoding);
@@ -379,5 +384,13 @@ public class HtmlParser implements CharCodes
         return dataBuf.toString().trim();
     }
     */
+	
+	public int getBufferSize() {
+		return bufferSize;
+	}
+	
+	public void setBufferSize(int size) {
+		bufferSize = size;
+	}
 }
 
